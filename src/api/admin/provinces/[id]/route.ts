@@ -23,11 +23,12 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const provinceService = req.scope.resolve(PROVINCE_MODULE)
   const { id } = req.params
+  const body = req.body as any
 
   try {
     const updateData: any = { id }
-    if (req.body.name !== undefined) updateData.name = req.body.name
-    if (req.body.code !== undefined) updateData.code = req.body.code
+    if (body.name !== undefined) updateData.name = body.name
+    if (body.code !== undefined) updateData.code = body.code
 
     const province = await provinceService.updateProvinces(updateData)
     res.json({ province })

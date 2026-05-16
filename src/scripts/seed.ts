@@ -95,14 +95,22 @@ export default async function seedWaterproData({ container }: ExecArgs) {
 
       // Assign SUPER_ADMIN role via RBAC
       const rbacRoleService = container.resolve(Modules.RBAC);
-      const superAdminRole = await rbacRoleService.listRoles({
-        name: "super_admin",
+      const query = container.resolve(ContainerRegistrationKeys.QUERY) as any;
+      
+      // Use query to find super_admin role
+      const { data: roles } = await query.graph({
+        entity: "role",
+        fields: ["id", "name"],
+        filters: { name: "super_admin" },
       });
 
-      if (superAdminRole.length) {
-        await rbacRoleService.addRolesToUsers([
-          { user_id: user.id, role_id: superAdminRole[0].id },
-        ]);
+      if (roles && roles.length > 0) {
+        // Use link module to assign role
+        const link = container.resolve(ContainerRegistrationKeys.LINK);
+        await link.create({
+          [Modules.USER]: { user_id: user.id },
+          [Modules.RBAC]: { role_id: roles[0].id },
+        });
       }
 
       logger.info("✅ Admin user created: admin@waterpro.id / supersecret");

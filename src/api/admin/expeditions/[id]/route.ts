@@ -25,16 +25,17 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const expeditionService = req.scope.resolve(EXPEDITION_MODULE)
   const { id } = req.params
+  const body = req.body as any
 
   try {
     const updateData: any = { id }
-    if (req.body.name !== undefined) updateData.name = req.body.name
-    if (req.body.code !== undefined) updateData.code = req.body.code
-    if (req.body.tracking_url_template !== undefined) updateData.tracking_url_template = req.body.tracking_url_template
-    if (req.body.is_active !== undefined) updateData.is_active = req.body.is_active
-    if (req.body.description !== undefined) updateData.description = req.body.description
-    if (req.body.flat_rate !== undefined) updateData.flat_rate = req.body.flat_rate
-    if (req.body.is_store_delivery !== undefined) updateData.is_store_delivery = req.body.is_store_delivery
+    if (body.name !== undefined) updateData.name = body.name
+    if (body.code !== undefined) updateData.code = body.code
+    if (body.tracking_url_template !== undefined) updateData.tracking_url_template = body.tracking_url_template
+    if (body.is_active !== undefined) updateData.is_active = body.is_active
+    if (body.description !== undefined) updateData.description = body.description
+    if (body.flat_rate !== undefined) updateData.flat_rate = body.flat_rate
+    if (body.is_store_delivery !== undefined) updateData.is_store_delivery = body.is_store_delivery
 
     const expedition = await expeditionService.updateExpeditions(updateData)
     res.json({ expedition })
