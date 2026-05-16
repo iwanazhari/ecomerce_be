@@ -1,0 +1,6 @@
+{
+  "name": "midtrans-payment-provider",
+  "version": "1.0.0",
+  "description": "Midtrans payment provider for Waterpro",
+  "main": "index.ts"
+}
