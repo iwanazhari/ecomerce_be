@@ -33,10 +33,11 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
  */
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const provinceService = req.scope.resolve(PROVINCE_MODULE)
+  const body = req.body as any
 
   const province = await provinceService.createProvinces({
-    name: req.body.name,
-    code: req.body.code ?? null,
+    name: body.name,
+    code: body.code ?? null,
   })
 
   res.status(201).json({ province })

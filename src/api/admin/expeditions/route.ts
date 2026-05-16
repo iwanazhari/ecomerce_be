@@ -37,15 +37,16 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
  */
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const expeditionService = req.scope.resolve(EXPEDITION_MODULE)
+  const body = req.body as any
 
   const expedition = await expeditionService.createExpeditions({
-    name: req.body.name,
-    code: req.body.code,
-    tracking_url_template: req.body.tracking_url_template ?? null,
-    is_active: req.body.is_active ?? true,
-    description: req.body.description ?? null,
-    flat_rate: req.body.flat_rate ?? 0,
-    is_store_delivery: req.body.is_store_delivery ?? false,
+    name: body.name,
+    code: body.code,
+    tracking_url_template: body.tracking_url_template ?? null,
+    is_active: body.is_active ?? true,
+    description: body.description ?? null,
+    flat_rate: body.flat_rate ?? 0,
+    is_store_delivery: body.is_store_delivery ?? false,
   })
 
   res.status(201).json({ expedition })
