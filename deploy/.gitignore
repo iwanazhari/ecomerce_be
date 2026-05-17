@@ -1,0 +1,2 @@
+# Ignore actual .env (local overrides) but NOT .env.production (committed template)
+.env
