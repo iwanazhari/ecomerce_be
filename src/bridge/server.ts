@@ -95,7 +95,9 @@ async function start() {
 
       console.log(`[Bridge] Forwarding "${event}" to ${io.sockets.sockets.size} clients`)
 
-      // Emit to all connected clients
+      // Emit both the specific event AND the "realtime" wrapper
+      // so frontend useWebSocket("realtime", handler) can process all events
+      io.emit('realtime', { event, data, timestamp })
       io.emit(event, { data, timestamp })
     } catch (err) {
       console.error('[Bridge] Failed to parse Redis message:', message, err)
