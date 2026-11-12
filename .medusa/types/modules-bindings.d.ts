@@ -18,6 +18,7 @@ import type { IAuthModuleService } from '@medusajs/framework/types'
 import type { IUserModuleService } from '@medusajs/framework/types'
 import type { IFulfillmentModuleService } from '@medusajs/framework/types'
 import type { INotificationModuleService } from '@medusajs/framework/types'
+import type Search from '@medusajs/medusa/search'
 import type { ICacheService } from '@medusajs/framework/types'
 import type { IEventBusModuleService } from '@medusajs/framework/types'
 import type { IWorkflowEngineService } from '@medusajs/framework/types'
@@ -50,6 +51,7 @@ declare module '@medusajs/framework/types' {
     'user': IUserModuleService,
     'fulfillment': IFulfillmentModuleService,
     'notification': INotificationModuleService,
+    'search': InstanceType<(typeof Search)['service']>,
     'cache': ICacheService,
     'event_bus': IEventBusModuleService,
     'workflows': IWorkflowEngineService,
