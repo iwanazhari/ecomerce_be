@@ -1,3 +1,4 @@
+import type Cloud from '@medusajs/cloud/.medusa/server/src/modules/cloud'
 import type { IStockLocationService } from '@medusajs/framework/types'
 import type { IInventoryService } from '@medusajs/framework/types'
 import type { IProductModuleService } from '@medusajs/framework/types'
@@ -14,10 +15,12 @@ import type { ICurrencyModuleService } from '@medusajs/framework/types'
 import type { IPaymentModuleService } from '@medusajs/framework/types'
 import type { IOrderModuleService } from '@medusajs/framework/types'
 import type { ISettingsModuleService } from '@medusajs/framework/types'
+import type { ITranslationModuleService } from '@medusajs/framework/types'
 import type { IAuthModuleService } from '@medusajs/framework/types'
 import type { IUserModuleService } from '@medusajs/framework/types'
 import type { IFulfillmentModuleService } from '@medusajs/framework/types'
 import type { INotificationModuleService } from '@medusajs/framework/types'
+import type Search from '@medusajs/medusa/search'
 import type { ICacheService } from '@medusajs/framework/types'
 import type { IEventBusModuleService } from '@medusajs/framework/types'
 import type { IWorkflowEngineService } from '@medusajs/framework/types'
@@ -30,6 +33,7 @@ import type WaterproNotification from '../../src/modules/notification-custom'
 
 declare module '@medusajs/framework/types' {
   interface ModuleImplementations {
+    'cloud': InstanceType<(typeof Cloud)['service']>,
     'stock_location': IStockLocationService,
     'inventory': IInventoryService,
     'product': IProductModuleService,
@@ -46,10 +50,12 @@ declare module '@medusajs/framework/types' {
     'payment': IPaymentModuleService,
     'order': IOrderModuleService,
     'settings': ISettingsModuleService,
+    'translation': ITranslationModuleService,
     'auth': IAuthModuleService,
     'user': IUserModuleService,
     'fulfillment': IFulfillmentModuleService,
     'notification': INotificationModuleService,
+    'search': InstanceType<(typeof Search)['service']>,
     'cache': ICacheService,
     'event_bus': IEventBusModuleService,
     'workflows': IWorkflowEngineService,
